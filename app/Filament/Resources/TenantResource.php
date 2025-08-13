@@ -6,6 +6,7 @@ use App\Filament\Resources\TenantResource\Pages;
 use App\Filament\Resources\TenantResource\RelationManagers;
 use App\Models\Tenant;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,10 +33,11 @@ class TenantResource extends Resource
                 TextInput::make("nama")
                     ->label("Nama Tenant")
                     ->required(),
-                TextInput::make("alamat")
+                Textarea::make("alamat")
                     ->label("Alamat Tenant")
                     ->required(),
                 TextInput::make("email")
+                    ->email()
                     ->required(),
                 TextInput::make("notelp")
                     ->required()

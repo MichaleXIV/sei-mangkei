@@ -32,14 +32,15 @@ class SubZonasiResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nama')
-                    ->label('Nama Sub Zonasi')
-                    ->required(),
                 Select::make('zonasi_id')
+                    ->label("Zonasi")
                     ->required()
                     ->native(false)
                     ->searchable()
                     ->options(Zonasi::pluck("nama", "id")->toArray()),
+                TextInput::make('nama')
+                    ->label('Nama Sub Zonasi')
+                    ->required(),
             ]);
     }
 

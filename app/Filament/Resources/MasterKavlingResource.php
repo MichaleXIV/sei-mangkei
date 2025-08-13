@@ -9,6 +9,7 @@ use Dom\Text;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -36,16 +37,25 @@ class MasterKavlingResource extends Resource
                 TextInput::make("no_bk")
                     ->label("No Blok Kavling")
                     ->required(),
-                TextInput::make("luas_kav")
-                    ->label("Luas Kavling (m²)")
-                    ->required()
-                    ->numeric(),
-                TextInput::make("lok_kav")
-                    ->label("Lok Kavling (Dalam/Luar) Pagar")
-                    ->required(),
                 TextInput::make("jenis_kav")
                     ->label("Jenis Kavling")
                     ->required(),
+                TextInput::make("lok_kav")
+                    ->label("Lok Kavling (Dalam/Luar) Pagar")
+                    ->required(),
+                TextInput::make("luas_kav")
+                    ->label("Luas Kavling")
+                    ->suffix("m²")
+                    ->required()
+                    ->numeric()
+                    ->live(debounce: 500)
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        $set('luas_kav_ha', $state ? number_format($state / 10000, 4) : null);
+                    }),
+                TextInput::make("luas_kav_ha")
+                    ->label("Luas Kavling (Hektar)")
+                    ->suffix("ha")
+                    ->disabled(),
             ]);
     }
 
@@ -59,15 +69,17 @@ class MasterKavlingResource extends Resource
                 TextColumn::make("no_bk")
                     ->label("No Blok Kavling")
                     ->searchable(),
-                TextColumn::make("luas_kav")
-                    ->label("Luas Kavling (m²)")
+                TextColumn::make("jenis_kav")
+                    ->label("Jenis Kavling")
                     ->searchable(),
                 TextColumn::make("lok_kav")
                     ->label("Lok Kavling (Dalam/Luar) Pagar")
                     ->searchable(),
-                TextColumn::make("jenis_kav")
-                    ->label("Jenis Kavling")
+                TextColumn::make("luas_kav")
+                    ->label("Luas Kavling")
+                    ->suffix("m²")
                     ->searchable(),
+
             ])
             ->filters([
                 //
