@@ -89,15 +89,6 @@ class TenantResource extends Resource
                 TextColumn::make("npwp")
                     ->label('Npwp')
                     ->searchable(),
-                TextColumn::make("luas_kav")
-                    ->label('Luas Kav')
-                    ->searchable(),
-                TextColumn::make("lok_kav")
-                    ->label('Lok Kav')
-                    ->searchable(),
-                TextColumn::make("jenis_kav")
-                    ->label('Jenis Kav')
-                    ->searchable()
             ])
             ->filters([
                 //
