@@ -34,6 +34,7 @@ return new class extends Migration
             $table->timestamp('last_edited_date')->nullable();
             $table->string('last_edited_user')->nullable();
             $table->timestamps();
+            $table->string("attachment")->nullable();
         });
     }
 

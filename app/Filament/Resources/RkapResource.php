@@ -7,10 +7,12 @@ use App\Filament\Resources\RkapResource\RelationManagers;
 use App\Models\Rkap;
 use Dom\Text;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -89,6 +91,10 @@ class RkapResource extends Resource
                     ->placeholder("Tahun RKAP")
                     ->numeric()
                     ->required(),
+                FileUpload::make('attachment')
+                    ->label('Upload Attachment')
+                    ->directory('attachments')
+                    ->visibility('public'),
             ]);
     }
 
@@ -126,6 +132,10 @@ class RkapResource extends Resource
                 TextColumn::make('tahun_rkap')
                     ->label('Tahun RKAP')
                     ->searchable(),
+                ImageColumn::make('attachment')
+                    ->label('Attachment')
+                    ->disk('public')
+                    ->visibility('public'),
             ])
             ->filters([
                 //

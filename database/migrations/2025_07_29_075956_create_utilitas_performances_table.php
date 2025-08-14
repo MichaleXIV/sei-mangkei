@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
             $table->string('bulan');
             $table->string('tahun');
-            $table->string('pelaku_usaha');
             $table->enum('jenis_utilitas', ["listrik", "air_bersih", "limbah_cair", "jasa_lain", "tank_farm", "dry_port"]);
             $table->enum('sumber_energi', ["pln", "plts", "pltbg", "wwtp_tahap_i", "wwtp_tahap_ii", "wtp_tahap_i", "wtp_tahap_ii", "wtp_tahap_iii"]);
             $table->double('penjualan_kuantitas');

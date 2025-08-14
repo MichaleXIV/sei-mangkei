@@ -80,10 +80,8 @@ class UtilitasPerformanceResource extends Resource
                     ->options($bulan),
                 TextInput::make('tahun')
                     ->label("Tahun")
+                    ->placeholder("Tahun")
                     ->numeric()
-                    ->required(),
-                TextInput::make('pelaku_usaha')
-                    ->label("Pelaku Usaha")
                     ->required(),
                 Select::make('jenis_utilitas')
                     ->label("Jenis Utilisasi")
@@ -99,6 +97,7 @@ class UtilitasPerformanceResource extends Resource
                     ->options($sumberEnergi),
                 TextInput::make('penjualan_kuantitas')
                     ->label("Penjualan Kuantitas")
+                    ->placeholder("Penjualan Kuantitas")
                     ->numeric()
                     ->required(),
                 Select::make('satuan')
@@ -111,6 +110,7 @@ class UtilitasPerformanceResource extends Resource
                     ]),
                 TextInput::make('pendapatan')
                     ->label("Pendapatan")
+                    ->placeholder("Pendapatan")
                     ->prefix("Rp. ")
                     ->numeric()
                     ->required(),
@@ -127,11 +127,9 @@ class UtilitasPerformanceResource extends Resource
                     ->searchable(),
                 TextColumn::make('tahun')
                     ->searchable(),
-                TextColumn::make('pelaku_usaha')
+                TextColumn::make('sumber_energi')
                     ->searchable(),
                 TextColumn::make('jenis_utilitas')
-                    ->searchable(),
-                TextColumn::make('sumber_energi')
                     ->searchable(),
                 TextColumn::make('penjualan_kuantitas')
                     ->searchable(),
