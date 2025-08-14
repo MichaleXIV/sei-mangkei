@@ -25,12 +25,14 @@ return new class extends Migration
             $table->timestamp('kontrak_date');
             $table->double('masa_sewa');
             $table->string('kontrak_nilai');
-            $table->enum('status', ["hgb", "hak_tanggung"]);
+            $table->enum('status', ["HGB", "Hak Tanggung"]);
             $table->timestamp('created_date')->nullable();
             $table->string('created_user')->nullable();
             $table->timestamp('last_edited_date')->nullable();
             $table->string('last_edited_user')->nullable();
             $table->timestamps();
+
+            $table->string("attachment")->nullable();
         });
     }
 

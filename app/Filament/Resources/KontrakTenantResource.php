@@ -285,7 +285,7 @@ class KontrakTenantResource extends Resource
                 TextColumn::make('status')
                     ->searchable(),
                 ImageColumn::make('attachment')
-                    ->label('Image')
+                    ->label('Attachment')
                     ->disk('public')
                     ->visibility('public'),
             ])

@@ -132,7 +132,7 @@ class ProspektiveTenantResource extends Resource
                 TextColumn::make('kontrak_nilai_rencana')
                     ->searchable(),
                 ImageColumn::make('attachment')
-                    ->label('Image')
+                    ->label('Attachment')
                     ->disk('public')
                     ->visibility('public'),
             ])

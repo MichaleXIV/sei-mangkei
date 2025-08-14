@@ -9,11 +9,13 @@ use App\Models\Tenant;
 use Dom\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,10 +65,14 @@ class PermohonanHgbAtauHtResource extends Resource
                     ->label('Status Permohonan')
                     ->required()
                     ->options([
-                        "hgb" => "HGB",
-                        "hak_tanggung" => "Hak Tanggung",
+                        "HGB" => "HGB",
+                        "Hak Tanggung" => "Hak Tanggung",
                     ])
                     ->native(false),
+                FileUpload::make('attachment')
+                    ->label('Upload Attachment')
+                    ->directory('attachments')
+                    ->visibility('public'),
             ]);
     }
 
@@ -91,6 +97,9 @@ class PermohonanHgbAtauHtResource extends Resource
                 TextColumn::make('status')
                     ->label("Status Permohonan")
                     ->searchable(),
+                ImageColumn::make('attachment')
+                    ->label('Attachment')
+                    ->disk('public')
             ])
             ->filters([
                 //
