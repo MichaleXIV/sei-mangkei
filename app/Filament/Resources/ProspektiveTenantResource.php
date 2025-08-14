@@ -51,7 +51,7 @@ class ProspektiveTenantResource extends Resource
                         name: 'kavlings',
                         titleAttribute: "no_bk",
                     )
-                    ->label('No Blok booking Kavling')
+                    ->label('No Blok Booking Kavling')
                     ->multiple()
                     ->preload()
                     ->searchable()
@@ -115,7 +115,7 @@ class ProspektiveTenantResource extends Resource
                     ->prefix("Rp. ")
                     ->searchable(),
                 TextColumn::make('kavlings.no_bk')
-                    ->label("No Blok Kavling")
+                    ->label("No Blok Booking Kavling")
                     ->listWithLineBreaks()
                     ->limitList(2)
                     ->expandableLimitedList()

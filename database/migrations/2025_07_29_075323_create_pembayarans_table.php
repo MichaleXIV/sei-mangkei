@@ -22,13 +22,13 @@ return new class extends Migration
             $table->string('tenant');
             $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
             $table->string('kontrak');
-            $table->timestamp('kontrak_date');
-            $table->double('masa_sewa');
-            $table->double("investasi");
+            $table->timestamp('kontrak_date')->nullable();
+            $table->double('masa_sewa')->nullable();
+            $table->double("investasi")->nullable();
             $table->string('kontrak_nilai');
             $table->string('pembayaran_termin');
             $table->double('nilai');
-            $table->string('persentase');
+            $table->string('persentase')->nullable();
             $table->date('date');
             $table->integer('id_kavling')->nullable();
             $table->timestamp('created_date')->nullable();
@@ -36,6 +36,7 @@ return new class extends Migration
             $table->timestamp('last_edited_date')->nullable();
             $table->string('last_edited_user')->nullable();
             $table->timestamps();
+            $table->enum('tipe_pembayaran', ["Rencana Pembayaran Tenant", "Realisasi Pembayaran Tenant", "Realisasi Investasi Infrastruktur Kek Sei Mangkei"]);
         });
     }
 
