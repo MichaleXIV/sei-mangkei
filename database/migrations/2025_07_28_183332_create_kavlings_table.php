@@ -39,6 +39,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('kontrak_tenants')
                 ->nullOnDelete();
+            $table->unsignedBigInteger('prospektive_tenant_id')->nullable();
+            $table->foreign('prospektive_tenant_id')
+                ->references('id')
+                ->on('prospektive_tenants')
+                ->nullOnDelete();
         });
     }
 

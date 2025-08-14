@@ -208,10 +208,9 @@ class KontrakTenantResource extends Resource
                     ->native(false),
                 FileUpload::make('attachment')
                     ->label('Upload Attachment')
-                    ->directory('attachments') // This will store files in storage/app/public/attachments
-                    ->visibility('public') // Files will be publicly accessible
-                    ->preserveFilenames() // Optional: preserve original filenames
-                    ->required(),
+                    ->directory('attachments')
+                    ->visibility('public')
+                    ->preserveFilenames(),
             ]);
     }
 

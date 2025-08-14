@@ -8,11 +8,13 @@ use App\Models\ProspektiveTenant;
 use App\Models\Tenant;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,38 +43,45 @@ class ProspektiveTenantResource extends Resource
                 TextInput::make('booking_fee')
                     ->label('Booking Fee')
                     ->placeholder("Booking Fee")
+                    ->prefix("Rp. ")
                     ->required()
                     ->numeric(),
-                TextInput::make('lok_kav_book')
-                    ->label('Lokasi Booking Kavling')
-                    ->placeholder("Lokasi Booking Kavling")
+                Select::make('kavlings')
+                    ->relationship(
+                        name: 'kavlings',
+                        titleAttribute: "no_bk",
+                    )
+                    ->label('No Blok booking Kavling')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
                     ->required(),
                 Select::make('evidence')
                     ->label('Evidence')
                     ->required()
                     ->options([
-                        "surat_minat" => "Surat Minat",
-                        "berita_acara_kesepatakan" => "Berita Acara Kesepatakan",
-                        "lainnya" => "Lainnya",
+                        "Surat Minat" => "Surat Minat",
+                        "Berita Acara Kesepatakan" => "Berita Acara Kesepatakan",
+                        "Lainnya" => "Lainnya",
                     ])
                     ->native(false),
                 Select::make('kategori')
                     ->label('Kategori')
                     ->required()
                     ->options([
-                        "cold" => "Cold",
-                        "warm" => "Warm",
-                        "hot" => "Hot",
+                        "Cold" => "Cold",
+                        "Warm" => "Warm",
+                        "Hot" => "Hot",
                     ])
                     ->native(false),
                 Select::make('status')
                     ->label('Status')
                     ->required()
                     ->options([
-                        "penjajakan_awal" => "Penjajakan Awal",
-                        "perjanjian_pendahuluan" => "Perjanjian Pendahuluan",
-                        "fs" => "FS",
-                        "deal_kontrak" => "Deal Kontrak",
+                        "Penjajakan Awal" => "Penjajakan Awal",
+                        "Perjanjian Pendahuluan" => "Perjanjian Pendahuluan",
+                        "FS" => "FS",
+                        "Deal Kontrak" => "Deal Kontrak",
                     ])
                     ->native(false),
                 DatePicker::make('kontrak_date')
@@ -84,7 +93,13 @@ class ProspektiveTenantResource extends Resource
                     ->label("Nilai Kontrak Rencana")
                     ->placeholder("Nilai kontrak Rencana")
                     ->numeric()
+                    ->prefix("Rp. ")
                     ->required(),
+                FileUpload::make('attachment')
+                    ->label('Upload Attachment')
+                    ->directory('attachments')
+                    ->visibility('public')
+                    ->preserveFilenames(),
             ]);
     }
 
@@ -93,10 +108,18 @@ class ProspektiveTenantResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('tenant')
+                    ->label("Nama Tenant")
                     ->searchable(),
                 TextColumn::make("booking_fee")
+                    ->label("Booking Fee")
+                    ->prefix("Rp. ")
                     ->searchable(),
-                TextColumn::make('lok_kav_book')
+                TextColumn::make('kavlings.no_bk')
+                    ->label("No Blok Kavling")
+                    ->listWithLineBreaks()
+                    ->limitList(2)
+                    ->expandableLimitedList()
+                    ->badge()
                     ->searchable(),
                 TextColumn::make('evidence')
                     ->searchable(),
@@ -108,6 +131,10 @@ class ProspektiveTenantResource extends Resource
                     ->searchable(),
                 TextColumn::make('kontrak_nilai_rencana')
                     ->searchable(),
+                ImageColumn::make('attachment')
+                    ->label('Image')
+                    ->disk('public')
+                    ->visibility('public'),
             ])
             ->filters([
                 //

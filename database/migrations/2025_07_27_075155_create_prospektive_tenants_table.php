@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('tenant');
             $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
             $table->double('booking_fee');
-            $table->string('lok_kav_book');
-            $table->enum('evidence', ["surat_minat", "berita_acara_kesepatakan", "lainnya"]);
-            $table->enum('kategori', ["cold", "warm", "hot"]);
-            $table->enum('status', ["penjajakan_awal", "perjanjian_pendahuluan", "fs", "deal_kontrak"]);
+            // $table->string('lok_kav_book');
+            $table->enum('evidence', ["Surat Minat", "Berita Acara Kesepatakan", "Lainnya"]);
+            $table->enum('kategori', ["Cold", "Warm", "Hot"]);
+            $table->enum('status', ["Penjajakan Awal", "Perjanjian Pendahuluan", "FS", "Deal Kontrak"]);
             $table->timestamp('kontrak_date');
             $table->double("kontrak_nilai_rencana");
             $table->integer('id_kavling')->nullable();
@@ -34,6 +34,8 @@ return new class extends Migration
             $table->timestamp('last_edited_date')->nullable();
             $table->string('last_edited_user')->nullable();
             $table->timestamps();
+
+            $table->string("attachment")->nullable();
         });
     }
 
