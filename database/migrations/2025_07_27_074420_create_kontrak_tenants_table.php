@@ -18,16 +18,26 @@ return new class extends Migration
             $table->string('remark')->nullable();
             $table->string('srs_id')->nullable();
             $table->integer('fcode')->nullable();
+
             $table->string('tenant');
+            $table->foreignId('tenant_id')->constrained()->onDelete("cascade");
+
             $table->double('luas');
-            $table->string('lok_kav');
-            $table->enum('marketer', ["internal_kinra", "marketing_agency"]);
-            $table->enum('jenis_tenant', ["prospective_tenant", "tenant_baru", "ekspansi"]);
-            $table->enum('skema', ["blocksales", "retail"]);
+            // $table->string('lok_kav');
+
+            // $table->string("no_bk");
+            // $table->foreignId("kavling_id")->constrained()->onDelete("cascade");
+
+            // $table->enum('marketer', ["internal_kinra", "marketing_agency"]);
+            // $table->string("marketer");
+            // $table->foreignId("marketer_id")->constrained()->onDelete("cascade");
+
+            $table->enum('jenis_tenant', ["Tenant Baru", "Ekspansi"]);
+            $table->enum('skema', ["Blocksales", "Retail"]);
             $table->string('jenis_industri');
-            $table->enum('sumber_modal', ["penanaman_modal_asing", "penanaman_modal_dalam_negeri"]);
+            $table->enum('sumber_modal', ["Penanaman Modal Asing", "Penanaman Modal Dalam Negeri"]);
             $table->string('negara_asal');
-            $table->enum('insentif', ["tax_holiday", "tax_allowance"]);
+            $table->enum('insentif', ["Tax Holiday", "Tax Allowance"]);
             $table->string('produksi');
             $table->string('kapasitas_produksi');
             $table->string('kontrak');
@@ -39,14 +49,15 @@ return new class extends Migration
             $table->string('no_perjanjian');
             $table->double('kavling_harga');
             $table->date('date_ppl');
-            $table->enum('kavling_jenis', ["kavling_mentahan", "kavling_siap_bangun"]);
-            $table->enum('status', ["hgb", "hak_tanggung"]);
-            $table->integer('id_kavling')->nullable();
+            $table->enum('kavling_jenis', ["Kavling Mentahan", "Kavling Siap Bangun"]);
+            $table->enum('status', ["HGB", "Hak Tanggung"]);
             $table->timestamp('created_date')->nullable();
             $table->string('created_user')->nullable();
             $table->timestamp('last_edited_date')->nullable();
             $table->string('last_edited_user')->nullable();
             $table->timestamps();
+
+            $table->string("attachment")->nullable();
         });
     }
 

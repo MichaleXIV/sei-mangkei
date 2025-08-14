@@ -33,6 +33,12 @@ return new class extends Migration
             $table->string('last_edited_user')->nullable();
             $table->string('luas_kawasan')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('kontrak_tenant_id')->nullable();
+            $table->foreign('kontrak_tenant_id')
+                ->references('id')
+                ->on('kontrak_tenants')
+                ->nullOnDelete();
         });
     }
 

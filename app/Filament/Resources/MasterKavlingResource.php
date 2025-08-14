@@ -36,6 +36,7 @@ class MasterKavlingResource extends Resource
                     ->required(),
                 TextInput::make("no_bk")
                     ->label("No Blok Kavling")
+                    ->unique()
                     ->required(),
                 TextInput::make("jenis_kav")
                     ->label("Jenis Kavling")
@@ -79,13 +80,16 @@ class MasterKavlingResource extends Resource
                     ->label("Luas Kavling")
                     ->suffix("m²")
                     ->searchable(),
-
+                TextColumn::make("kontrakTenant.tenant")
+                    ->label("Berkontrak Dengan Tenant")
+                    ->searchable()
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

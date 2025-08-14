@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SubZonasi;
 use App\Models\User;
 use App\Models\Zonasi;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,6 +24,11 @@ class DatabaseSeeder extends Seeder
             "Zona Logistik",
             "Zona Ruang Terbuka Hijau",
         ];
+        $subZonasiIndustri = [
+            "low",
+            "medium",
+            "high"
+        ];
 
         User::factory()->create([
             'name' => 'admin',
@@ -32,9 +38,18 @@ class DatabaseSeeder extends Seeder
 
 
         foreach ($zonasiList as $zonasi) {
-            Zonasi::create([
+            $masterZonasi = Zonasi::create([
                 'nama' => $zonasi,
             ]);
+            if ($zonasi == "Zona Industri") {
+                foreach ($subZonasiIndustri as $subIndustri) {
+                    SubZonasi::create([
+                        "zonasi_id" => $masterZonasi->id,
+                        "zonasi" => $masterZonasi->nama,
+                        "nama" => $subIndustri,
+                    ]);
+                };
+            };
         };
     }
 }

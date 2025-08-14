@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kavling extends Model
 {
@@ -26,5 +27,11 @@ class Kavling extends Model
         'last_edited_date',
         'last_edited_user',
         'luas_kawasan',
+        'kontrak_tenant_id'
     ];
+
+    public function kontrakTenant(): BelongsTo
+    {
+        return $this->belongsTo(KontrakTenant::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Marketer extends Model
 {
@@ -25,4 +26,9 @@ class Marketer extends Model
         'npwp',
         'jenis_marketer'
     ];
+
+    public function kontrakTenants()
+    {
+        return $this->belongsToMany(KontrakTenant::class);
+    }
 }
